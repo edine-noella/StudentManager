@@ -1,0 +1,24 @@
+@page
+@model StudentManager.Pages.Students.Create
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<h1>Add Student</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Student.FullName"></label>
+        <input asp-for="Student.FullName" />
+    </div>
+    <div>
+        <label asp-for="Student.Age"></label>
+        <input asp-for="Student.Age" />
+    </div>
+    <div>
+        <label asp-for="Student.EnrollmentDate"></label>
+        <input asp-for="Student.EnrollmentDate" type="date" />
+    </div>
+    <button type="submit">Save</button>
+</form>
