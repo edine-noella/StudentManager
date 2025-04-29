@@ -1,0 +1,34 @@
+@page
+@model StudentManager.Pages.Students.Students
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h1>Student List</h1>
+<a asp-page="Create">Add New Student</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Enrollment Date</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var student in Model.StudentsList)
+    {
+        <tr>
+            <td>@student.FullName</td>
+            <td>@student.Age</td>
+            <td>@student.EnrollmentDate.ToShortDateString()</td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@student.Id">Edit</a> |
+                <a asp-page="Details" asp-route-id="@student.Id">Details</a> |
+                <a asp-page="Delete" asp-route-id="@student.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
