@@ -8,7 +8,12 @@ namespace StudentManager.Pages.Students;
 public class Create : PageModel
 {
     private readonly AppDbContext _context;
-    public Create(AppDbContext context) => _context = context;
+    private readonly ILogger<Create> _logger;
+    public Create(AppDbContext context, ILogger<Create> logger)
+    {
+        _context = context;
+        _logger = logger;
+    }
     
     [BindProperty]
     public Student Student { get; set; }
@@ -17,12 +22,32 @@ public class Create : PageModel
     
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid) return Page();
+        
+        _logger.LogInformation("OnPostAsync called with Student: {@Student}", Student);
+
+        if (!ModelState.IsValid)
+        {
+            _logger.LogWarning("ModelState is invalid.");
+            return Page();
+        }
         
         
-        _context.Students.Add(Student);
-        await _context.SaveChangesAsync();
-        return RedirectToPage("./Students");
+        try
+        {
+            _context.Students.Add(Student);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Student added successfully: {@Student}", Student);
+            return RedirectToPage("./Students");
+        }
+        catch (Exception ex)
+        {
+            // Log the error if something goes wrong
+            _logger.LogError(ex, "Error occurred while saving the student.");
+            ModelState.AddModelError(string.Empty, "An error occurred while saving the student.");
+            return Page();
+        }
+   
     }
     
 }

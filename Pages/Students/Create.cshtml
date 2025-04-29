@@ -10,15 +10,19 @@
 <form method="post">
     <div>
         <label asp-for="Student.FullName"></label>
-        <input asp-for="Student.FullName" />
+        <input id="FullName" asp-for="Student.FullName" />
     </div>
     <div>
         <label asp-for="Student.Age"></label>
-        <input asp-for="Student.Age" />
+        <input id="Age" asp-for="Student.Age" />
+    </div>
+    <div>
+        <label asp-for="Student.City"></label>
+        <input id="City" asp-for="Student.City" type="text" />
     </div>
     <div>
         <label asp-for="Student.EnrollmentDate"></label>
-        <input asp-for="Student.EnrollmentDate" type="date" />
+        <input id="EnrollmentDate" asp-for="Student.EnrollmentDate" type="date" />
     </div>
     <button type="submit">Save</button>
 </form>
