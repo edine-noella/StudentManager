@@ -28,6 +28,32 @@ public class Edit : PageModel
         return Page();
     }
 
+    // public async Task<IActionResult> OnPostAsync()
+    // {
+    //     if (!ModelState.IsValid)
+    //     {
+    //         return Page();
+    //     }
+    //
+    //     _context.Attach(Student).State = EntityState.Modified;
+    //
+    //     try
+    //     {
+    //         await _context.SaveChangesAsync();
+    //     }
+    //     catch (DbUpdateConcurrencyException)
+    //     {
+    //         if (!_context.Students.Any(e => e.Id == Student.Id))
+    //         {
+    //             return NotFound();
+    //         }
+    //
+    //         throw;
+    //     }
+    //
+    //     return RedirectToPage("./Students");
+    // }
+    
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
@@ -35,22 +61,19 @@ public class Edit : PageModel
             return Page();
         }
 
-        _context.Attach(Student).State = EntityState.Modified;
-
-        try
+        var studentToUpdate = await _context.Students.FindAsync(Student.Id);
+    
+        if (studentToUpdate == null)
         {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Students.Any(e => e.Id == Student.Id))
-            {
-                return NotFound();
-            }
-
-            throw;
+            return NotFound();
         }
 
+        studentToUpdate.FullName = Student.FullName;
+        studentToUpdate.Age = Student.Age;
+        studentToUpdate.City = Student.City;
+        studentToUpdate.EnrollmentDate = Student.EnrollmentDate;
+
+        await _context.SaveChangesAsync();
         return RedirectToPage("./Students");
     }
     
