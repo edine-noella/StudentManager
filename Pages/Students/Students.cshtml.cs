@@ -17,6 +17,14 @@ public class Students : PageModel
    
    public async Task OnGetAsync()
    {
-      StudentsList = await _context.Students.ToListAsync();
+      // StudentsList = await _context.Students.ToListAsync(); 
+      
+      //get students whose age is greater than 20 and give them in alphabetial order of fullname
+      StudentsList = await _context.Students
+         .Where(s => s.Age > 20)
+         .OrderBy(s => s.FullName)
+         .ToListAsync();
+      
+      
    }
 }
