@@ -8,21 +8,29 @@
 <h1>Add Student</h1>
 
 <form method="post">
-    <div>
+    <partial name="_ValidationScriptsPartial" />
+    <validation-summary model-only></validation-summary>
+
+    <div class="form-group">
         <label asp-for="Student.FullName"></label>
-        <input id="FullName" asp-for="Student.FullName" />
+        <input id="FullName" asp-for="Student.FullName" class="form-control"/>
+        <span asp-validation-for="Student.FullName" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Student.Age"></label>
-        <input id="Age" asp-for="Student.Age" />
+        <input id="Age" asp-for="Student.Age" class="form-control"/>
+        <span asp-validation-for="Student.Age" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Student.City"></label>
-        <input id="City" asp-for="Student.City" type="text" />
+        <input id="City" asp-for="Student.City" type="text" class="form-control"/>
+        <span asp-validation-for="Student.City" class="text-danger"></span>
     </div>
-    <div>
+    <div class="form-group">
         <label asp-for="Student.EnrollmentDate"></label>
-        <input id="EnrollmentDate" asp-for="Student.EnrollmentDate" type="date" />
+        <input id="EnrollmentDate" asp-for="Student.EnrollmentDate" type="date" class="form-control"/>
+        <span asp-validation-for="Student.EnrollmentDate" class="text-danger"></span>
     </div>
+
     <button type="submit">Save</button>
 </form>
