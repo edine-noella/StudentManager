@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StudentManager.Data;
+using StudentManager.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//my custom middleware
+app.UseMiddleware<RequestTimeLoggerMiddleware>();
 
 app.UseRouting();
 
