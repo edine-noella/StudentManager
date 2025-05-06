@@ -10,6 +10,7 @@ public class Student
 
     [Required(ErrorMessage = "full name is required !!!")]
     [StringLength(100, ErrorMessage = "full name cannot exceed 100 characters")]
+    [RegularExpression(@"[A-Z]+", ErrorMessage = "Only upper case characters are allowed.")]
     public string FullName { get; set; }
 
     [Range(1,120, ErrorMessage = "age must be between 1 and 120 years!")]
