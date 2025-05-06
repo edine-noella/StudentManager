@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentManager.Data;
 using StudentManager.Middlewares;
+using StudentManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<ITimeService, TimeService>();//a new instance is going to be created everythime it's requested
 
 
 var app = builder.Build();
